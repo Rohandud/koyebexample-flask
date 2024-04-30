@@ -7,3 +7,4 @@ MarkupSafe==2.1.1
 Werkzeug==2.2.2
 pyTelegramBotAPI==4.17.0
 indic_transliteration==2.3.59
+python-dotenv==1.0.1
