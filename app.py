@@ -1,6 +1,6 @@
 import telebot
 import json
-from Flask
+from Flask import flask
 import random
 from indic_transliteration import sanscript
 import os
