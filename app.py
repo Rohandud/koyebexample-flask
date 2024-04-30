@@ -17,11 +17,11 @@ TOKEN = os.getenv('TOKEN')
 # Initialize Telebot with the bot token
 bot = telebot.TeleBot(TOKEN, threaded=False)
 
-# Initialize the bot
-@app.route('/', methods=['GET', 'POST'])
+# Define the webhook route for receiving updates from Telegram
+@app.route('/', methods=['POST'])
 def webhook():
-    if flask.request.method == 'POST':
-        update = telebot.types.Update.de_json(flask.request.stream.read().decode('utf-8'))
+    if request.method == 'POST':
+        update = telebot.types.Update.from_json(request.stream.read().decode('utf-8'))
         bot.process_new_updates([update])
         return 'ok', 200
     else:
@@ -34,7 +34,7 @@ def start(message):
     print(f"start {user_name}")
     bot.reply_to(message, f"Hey {user_name}!")
 
-# Define a function to sanitize messages
+# Define a function to sanitize messages (not currently used)
 def sanitize_message(message):
     if message.endswith(" ||"):
         return message[:-3]  # Remove the last 3 characters (" ||")
