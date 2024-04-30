@@ -17,12 +17,15 @@ TOKEN = os.getenv('TOKEN')
 # Initialize Telebot with the bot token
 bot = telebot.TeleBot(TOKEN, threaded=False)
 
-# Define the webhook route for receiving updates from Telegram
-@app.route('/', methods=['POST'])
+# Initialize the bot
+@app.route('/', methods=['GET', 'POST'])
 def webhook():
-    update = telebot.types.Update.de_json(request.stream.read().decode('utf-8'))
-    bot.process_new_updates([update])
-    return 'ok', 200
+    if flask.request.method == 'POST':
+        update = telebot.types.Update.de_json(flask.request.stream.read().decode('utf-8'))
+        bot.process_new_updates([update])
+        return 'ok', 200
+    else:
+        return 'Hello', 200
 
 # Define a message handler for the /start command
 @bot.message_handler(commands=['start'])
