@@ -1,12 +1,12 @@
 import telebot
 import json
-from flask import Flask
+from Flask
 import random
 from indic_transliteration import sanscript
 import os
 from dotenv import load_dotenv, dotenv_values 
 load_dotenv()
-app = Flask(__name__)
+app = flask.Flask(__name__)
 TOKEN = os.getenv('TOKEN')
 bot = telebot.TeleBot(TOKEN, threaded=False)
 
